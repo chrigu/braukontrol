@@ -1,3 +1,4 @@
+import './rxjs-operators';
 import { Component } from '@angular/core';
 
 @Component({
