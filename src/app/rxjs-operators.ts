@@ -15,4 +15,5 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/timeInterval';
+import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/timer';

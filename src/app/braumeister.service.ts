@@ -23,8 +23,7 @@ export class BraumeisterService {
         url: `${URL}`
     };
 
-    // this.data$ = new Subject();
-    this.data$ = Observable.timer(0, 10000)
+    this.data$ = Observable.timer(0, 5000)
       .timeInterval()
       .switchMap(() => this.http.request(new Request(options))
           .map((data: Response) => this.parseData(data))
@@ -56,17 +55,17 @@ export class BraumeisterService {
   }
 
   private parseData(data: Response):Object {
-          let regex = /(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X/;
-          let results = regex.exec(data.text())
-          console.log(results);
+    let regex = /(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X/;
+    let results = regex.exec(data.text())
+    console.log(results);
 
-          return {
-            time: moment(),
-            bmTime: results[2],
-            status: results[3],
-            temperature: results[5].replace(" ", ""),
-            uptime: results[7]
-          }
+    return {
+      time: moment(),
+      bmTime: results[2],
+      status: +results[3],
+      temperature: parseFloat(results[5].replace(" ", "")),
+      uptime: results[7]
+    }
   }
 
   // private getDataFromBm() {

@@ -1,4 +1,7 @@
-<p>
-  main-component works!
-</p>
-<app-temperature-chart [temperatureData]="tempData"></app-temperature-chart>
+    <md-card>
+      <md-input placeholder="Braumeister IP adress"></md-input>
+      <button md-raised-button (click)="toggleRecord()" color="accent">{{ recordText }}</button>
+      <app-temperature-chart [temperatureData]="temp"></app-temperature-chart>
+    </md-card>
+
+
