@@ -1,4 +1,5 @@
 import { Subscription } from 'rxjs/Subscription'
+import { List } from 'immutable' 
 import { Observable } from 'rxjs/Observable'
 import { Component, OnInit } from '@angular/core';
 import { BraumeisterService } from '../braumeister.service';
@@ -10,24 +11,26 @@ import { BraumeisterService } from '../braumeister.service';
 })
 export class MainComponentComponent implements OnInit {
 
-  private tempData: Object[] = [];
+  // private tempData: Object[] = [];
+  private tempData: List<any> = List();
   private recording: boolean = false;
   private recordText = "Record";
   private tempSubscription: Subscription;
   private temp$: Observable<any>;
   private temp: Object;
+  private ip = "https://www.trivialview.ch/bm.txt";
 
   constructor(private braumeisterService: BraumeisterService) { 
-
-    this.temp$ = this.braumeisterService.getData()
-                              .map((data:any) => { 
-                                return { x: data.time, y: data.temperature} 
-                              })
-                              .map((data) => {
-                                this.tempData.push(data);
-                                return this.tempData;
-                              });
-
+    // const URL = "https://www.trivialview.ch/bm.txt";
+      this.tempSubscription = this.braumeisterService.getStream()
+          .map((data:any) => { 
+            let dataItem = { x: data.time.toDate(), y: data.temperature};
+            this.tempData = this.tempData.push(dataItem);
+            return this.tempData;
+          })
+          .subscribe((data) => {
+            this.temp = data;
+          });
   }
 
   ngOnInit() {
@@ -38,10 +41,8 @@ export class MainComponentComponent implements OnInit {
   }
 
   private startRecording() {
-      this.tempSubscription = this.temp$
-                            .subscribe((data) => {
-                              this.temp = data;
-                            });
+    this.braumeisterService.setUrl(this.ip);
+
   }
 
   private stopRecording() {
@@ -53,8 +54,10 @@ export class MainComponentComponent implements OnInit {
 
     if (this.recording) {
       this.recordText = "Stop";
+      this.startRecording();
     } else {
       this.recordText = "Record";
+      this.stopRecording();
     }
   }
 

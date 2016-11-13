@@ -30,8 +30,8 @@ chart: {
         bottom: 40,
         left: 55
       },
-      x: function(d){ return d.x; },
-      y: function(d){ return d.y; },
+      x: d => d.x,
+      y: d => d.y,
       useInteractiveGuideline: true,
       dispatch: {
         stateChange: function(e){ console.log("stateChange"); },
@@ -40,7 +40,12 @@ chart: {
         tooltipHide: function(e){ console.log("tooltipHide"); }
       },
       xAxis: {
-        axisLabel: 'Time (ms)'
+        axisLabel: 'Time',
+        tickFormat: function(d){
+          console.log(d);
+          return d3.time.format('%H:%M')(new Date(d))
+          // return d3.format('%H:%M')(d);
+        },
       },
       yAxis: {
         axisLabel: 'Temperatur (C)',
@@ -59,15 +64,14 @@ chart: {
 
   ngOnChanges(changes: any) {
     if (this.nvD3.chart) {
-      console.log(changes['temperatureData']['currentValue']);
       let tempData = {
-          values: changes['temperatureData']['currentValue'],
+          values: changes['temperatureData']['currentValue'].toArray(),
           key: "Temperature",
           color: '#7777ff'
         };
       this.data = [tempData];
       this.nvD3.chart.update()
-      this.cd.detectChanges();
+      // this.cd.detectChanges();
 
     }
   }

@@ -1,5 +1,5 @@
     <md-card>
-      <md-input placeholder="Braumeister IP adress"></md-input>
+      <md-input placeholder="Braumeister IP adress" [(ngModel)]="ip"></md-input>
       <button md-raised-button (click)="toggleRecord()" color="accent">{{ recordText }}</button>
       <app-temperature-chart [temperatureData]="temp"></app-temperature-chart>
     </md-card>

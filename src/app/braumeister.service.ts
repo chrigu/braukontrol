@@ -4,30 +4,38 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestMethod, Request } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-const URL = "https://www.trivialview.ch/bm.txt";
-
 @Injectable()
 export class BraumeisterService {
 
   private data$: Observable<any>;
   private interval:any;
+  private url$: Subject<string>;
 
   constructor(private http: Http) { 
 
-    let header = {'Content-Type': 'text/plain'};
+    this.url$ = new Subject();
 
-    let headers = new Headers(header)
-
-    let options = {
-        method: RequestMethod.Get,
-        url: `${URL}`
-    };
-
-    this.data$ = Observable.timer(0, 5000)
+    this.data$ = Observable.combineLatest(
+      this.url$.startWith("").filter(url => url !== ""),
+      Observable.timer(0, 5000)
       .timeInterval()
-      .switchMap(() => this.http.request(new Request(options))
-          .map((data: Response) => this.parseData(data))
-          .catch(this.handleError));
+    )
+    .map((values) => {
+      let header = {'Content-Type': 'text/plain'};
+
+      let headers = new Headers(header)
+
+      let options = {
+          method: RequestMethod.Get,
+          url: values[0]
+      };
+
+      return options;
+    })
+    .do(x => console.log(x))
+    .switchMap(options => this.http.request(new Request(options))
+        .map((data: Response) => this.parseData(data))
+        .catch(this.handleError));
 
 // "0X19:21X4006X1000X 44.0X0X34:02X2X5X3X0XAPHTXpHX000
   }
@@ -46,12 +54,12 @@ export class BraumeisterService {
     return Observable.throw(errMsg);
   }
 
-  public getData() {
-    // if (this.data$ == null) {
-    //   this.data$ = new Subject();
-    // }
-
+  public getStream(): Observable<any> {
     return this.data$;
+  }
+
+  public setUrl(url: string) {
+    this.url$.next(url);
   }
 
   private parseData(data: Response):Object {
@@ -67,11 +75,5 @@ export class BraumeisterService {
       uptime: results[7]
     }
   }
-
-  // private getDataFromBm() {
-  //   console.log("asfasfd");
-  //   return this.http.get(this.url)
-  //         .map(data => this.data$.next(data));
-  // }
 
 }
