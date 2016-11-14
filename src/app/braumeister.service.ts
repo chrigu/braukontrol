@@ -27,12 +27,11 @@ export class BraumeisterService {
 
       let options = {
           method: RequestMethod.Get,
-          url: values[0]
+          url: "http://" + values[0]
       };
 
       return options;
     })
-    .do(x => console.log(x))
     .switchMap(options => this.http.request(new Request(options))
         .map((data: Response) => this.parseData(data))
         .catch(this.handleError));

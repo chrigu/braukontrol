@@ -42,18 +42,18 @@ chart: {
       xAxis: {
         axisLabel: 'Time',
         tickFormat: function(d){
-          console.log(d);
           return d3.time.format('%H:%M')(new Date(d))
           // return d3.format('%H:%M')(d);
         },
       },
       yAxis: {
-        axisLabel: 'Temperatur (C)',
+        axisLabel: 'Temperature (C)',
         tickFormat: function(d){
-          return d3.format('.02f')(d);
+          return d3.format('.01f')(d);
         },
         axisLabelDistance: -10
       },
+      forceY: [30, 100],
       callback: function(chart){
         console.log("!!! lineChart callback !!!");
       }
@@ -67,7 +67,8 @@ chart: {
       let tempData = {
           values: changes['temperatureData']['currentValue'].toArray(),
           key: "Temperature",
-          color: '#7777ff'
+          color: '#E53935',
+          area: false
         };
       this.data = [tempData];
       this.nvD3.chart.update()

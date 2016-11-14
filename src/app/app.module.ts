@@ -6,6 +6,7 @@ import { MaterialModule } from '@angular/material';
 import { nvD3Module } from './ng2-nvd3/ng2-nvd3.module';
 
 import { BraumeisterService } from './braumeister.service';
+import { LocalstorageService } from './localstorage.service';
 
 import { AppComponent } from './app.component';
 import { MainComponentComponent } from './main-component/main-component.component';
@@ -24,7 +25,7 @@ import { TemperatureChartComponent } from './temperature-chart/temperature-chart
     MaterialModule.forRoot(),
     nvD3Module
   ],
-  providers: [BraumeisterService],
+  providers: [BraumeisterService, LocalstorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

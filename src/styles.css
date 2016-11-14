@@ -1,4 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
 .nv-background {
     fill: transparent;
+}
+
+.nv-line {
+    fill: transparent;
+}
+
+.nvtooltip, .xy-tooltip {
+    background-color: #fff;
+    border-radius: 4px;
+    -webkit-box-shadow: 3px 6px 30px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 6px 30px -9px rgba(0,0,0,0.75);
+    box-shadow: 3px 6px 30px -9px rgba(0,0,0,0.75);
 }

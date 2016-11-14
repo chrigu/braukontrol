@@ -7,5 +7,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private title = 'Braukontrol';
 }

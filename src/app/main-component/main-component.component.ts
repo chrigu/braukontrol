@@ -3,6 +3,7 @@ import { List } from 'immutable'
 import { Observable } from 'rxjs/Observable'
 import { Component, OnInit } from '@angular/core';
 import { BraumeisterService } from '../braumeister.service';
+import { LocalstorageService } from '../localstorage.service';
 
 @Component({
   selector: 'app-main-component',
@@ -18,14 +19,19 @@ export class MainComponentComponent implements OnInit {
   private tempSubscription: Subscription;
   private temp$: Observable<any>;
   private temp: Object;
-  private ip = "https://www.trivialview.ch/bm.txt";
+  //private ip = "https://www.trivialview.ch/bm.txt";
+  private ip = "localhost:3000/bm.txt";
 
-  constructor(private braumeisterService: BraumeisterService) { 
+  constructor(
+    private braumeisterService: BraumeisterService,
+    private localStorageService: LocalstorageService
+    ) { 
     // const URL = "https://www.trivialview.ch/bm.txt";
       this.tempSubscription = this.braumeisterService.getStream()
           .map((data:any) => { 
             let dataItem = { x: data.time.toDate(), y: data.temperature};
             this.tempData = this.tempData.push(dataItem);
+            this.localStorageService.saveData(data);
             return this.tempData;
           })
           .subscribe((data) => {
