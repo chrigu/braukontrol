@@ -1,7 +1,7 @@
     <md-card>
       <md-input placeholder="Braumeister IP adress" [(ngModel)]="ip"></md-input>
       <button md-raised-button (click)="toggleRecord()" color="primary">{{ recordText }}</button>
-      <button md-raised-button (click)="toggleRecord()" color="primary">Export</button>
+      <button *ngIf="!recording" md-raised-button (click)="export()" color="primary">Export</button>
       <app-temperature-chart [temperatureData]="temp"></app-temperature-chart>
     </md-card>
 

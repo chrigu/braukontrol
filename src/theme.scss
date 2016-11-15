@@ -8,11 +8,22 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$primary-color-dark:   #0288D1;
-$primary-color:        #03A9F4;
-$primary-color-light:  #B3E5FC;
-$primary-color-text:   #FFFFFF;
-$accent-color:         #FF5252;
-$primary-text-color:   #212121;
-$secondary-text-color: #757575;
-$divider-color:        #BDBDBD;
+
+$braukontrol-app-primary-dark:   #0288D1;
+$braukontrol-app-primary:        #03A9F4;
+$braukontrol-app-primary-light:  #B3E5FC;
+$braukontrol-app-primary-text:   #FFFFFF;
+$braukontrol-app-accent:         #FF5252;
+$braukontrol-app-primary-text:   #212121;
+$braukontrol-app-secondary-text: #757575;
+$braukontrol-app-divider:        #BDBDBD;
+
+$braukontrol-app-warn:    md-palette($md-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$braukontrol-app-theme: md-light-theme($braukontrol-app-primary, $braukontrol-app-accent, $braukontrol-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($braukontrol-app-theme);

@@ -15,7 +15,6 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "theme.scss",
         "styles.css"
       ],
       "scripts": [

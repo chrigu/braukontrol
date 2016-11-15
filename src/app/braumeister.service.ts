@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestMethod, Request } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+const TIMEOUT = 60000;
+
 @Injectable()
 export class BraumeisterService {
 
@@ -17,7 +19,7 @@ export class BraumeisterService {
 
     this.data$ = Observable.combineLatest(
       this.url$.startWith("").filter(url => url !== ""),
-      Observable.timer(0, 5000)
+      Observable.timer(0, TIMEOUT)
       .timeInterval()
     )
     .map((values) => {

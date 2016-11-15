@@ -31,7 +31,7 @@ export class MainComponentComponent implements OnInit {
           .map((data:any) => { 
             let dataItem = { x: data.time.toDate(), y: data.temperature};
             this.tempData = this.tempData.push(dataItem);
-            this.localStorageService.saveData(data);
+            this.localStorageService.pushData(data);
             return this.tempData;
           })
           .subscribe((data) => {
@@ -47,8 +47,8 @@ export class MainComponentComponent implements OnInit {
   }
 
   private startRecording() {
+    this.localStorageService.reset();
     this.braumeisterService.setUrl(this.ip);
-
   }
 
   private stopRecording() {
@@ -65,6 +65,10 @@ export class MainComponentComponent implements OnInit {
       this.recordText = "Record";
       this.stopRecording();
     }
+  }
+
+  private export() {
+    this.localStorageService.generateCsv();
   }
 
 }
