@@ -1,4 +1,4 @@
-@import '~@angular/material/core/theming/all-theme';
+@import '../node_modules/@angular/material/core/theming/all-theme';
 // Plus imports for other components in your app.
 
 // Include the base styles for Angular Material core. We include this here so that you only
@@ -9,14 +9,14 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
 
-$braukontrol-app-primary-dark:   #0288D1;
-$braukontrol-app-primary:        #03A9F4;
-$braukontrol-app-primary-light:  #B3E5FC;
-$braukontrol-app-primary-text:   #FFFFFF;
-$braukontrol-app-accent:         #FF5252;
-$braukontrol-app-primary-text:   #212121;
-$braukontrol-app-secondary-text: #757575;
-$braukontrol-app-divider:        #BDBDBD;
+$braukontrol-app-primary-dark:      md-palette($md-light-blue, 700);
+$braukontrol-app-primary:           md-palette($md-light-blue, 500);
+$braukontrol-app-primary-light:     md-palette($md-light-blue, 100);
+$braukontrol-app-primary-text:      md-palette($md-grey, 0);
+$braukontrol-app-accent:            md-palette($md-red, A200);
+$braukontrol-app-primary-text:      md-palette($md-grey, 900);
+$braukontrol-app-secondary-text:    md-palette($md-grey, 600);
+$braukontrol-app-divider:           md-palette($md-grey, A400);
 
 $braukontrol-app-warn:    md-palette($md-red);
 
