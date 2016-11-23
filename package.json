@@ -8,7 +8,11 @@
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update",
-    "e2e": "protractor"
+    "e2e": "protractor",
+    "build": "ng build && cp -R src/public dist/public",
+    "prepare": "cp -a electron/. dist",
+    "electron": "npm run prepare && electron dist",
+    "package": "npm run build && npm run prepare && ./node_modules/electron-packager/cli.js dist App --platform=darwin --arch=all --out=dist-app --overwrite"
   },
   "private": true,
   "dependencies": {
@@ -40,6 +44,8 @@
     "@types/node": "^6.0.42",
     "angular-cli": "1.0.0-beta.17",
     "codelyzer": "~0.0.26",
+    "electron": "^1.4.7",
+    "electron-packager": "^8.3.0",
     "jasmine-core": "2.4.1",
     "jasmine-spec-reporter": "2.5.0",
     "karma": "1.2.0",
