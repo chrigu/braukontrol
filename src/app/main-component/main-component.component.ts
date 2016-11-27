@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs/Subscription'
-import { List } from 'immutable' 
+import { List, Map } from 'immutable' 
 import { Observable } from 'rxjs/Observable'
 import { Component, OnInit } from '@angular/core';
 import { BraumeisterService } from '../braumeister.service';
@@ -12,13 +12,17 @@ import { LocalstorageService } from '../localstorage.service';
 })
 export class MainComponentComponent implements OnInit {
 
-  // private tempData: Object[] = [];
-  private tempData: List<any> = List();
+  private data = Map({
+      temperature: List(),
+      targetTemperature: List()
+  });
+  // private tempData: List<any> = List();
   private recording: boolean = false;
   private recordText = "Record";
   private tempSubscription: Subscription;
   private temp$: Observable<any>;
-  private temp: Object;
+  private displayData: Object;
+  private showTargetTemp = false;
   //private ip = "https://www.trivialview.ch/bm.txt";
   private ip = "localhost:3000/bm.txt";
 
@@ -26,16 +30,35 @@ export class MainComponentComponent implements OnInit {
     private braumeisterService: BraumeisterService,
     private localStorageService: LocalstorageService
     ) { 
+
     // const URL = "https://www.trivialview.ch/bm.txt";
       this.tempSubscription = this.braumeisterService.getStream()
           .map((data:any) => { 
-            let dataItem = { x: data.time.toDate(), y: data.temperature};
-            this.tempData = this.tempData.push(dataItem);
+            // get right data
+
+            // save all data to localstorage
+            // save all data in right format to local Object
+            // filter data by active parameters
+            // set displayData 
             this.localStorageService.pushData(data);
-            return this.tempData;
+            let tempdDataItem = { x: data.time.toDate(), y: data.temperature};
+            let targetTempdDataItem = { x: data.time.toDate(), y: data.targetTemperature};
+            this.data = this.data.set('temperature', this.data.get('temperature').push(tempdDataItem));
+            this.data = this.data.set('targetTemperature', this.data.get('targetTemperature').push(targetTempdDataItem));
+            // this.data = this.tempData.push(tempdDataItem);
+
+            let displayData = Map({
+              temperature: this.data.get('temperature')
+            });
+            if (this.showTargetTemp) {
+              displayData = displayData.set('targetTemperature', this.data.get('targetTemperature'));
+            }
+
+            return displayData;
           })
           .subscribe((data) => {
-            this.temp = data;
+            console.log(data);
+            this.displayData = data;
           });
   }
 

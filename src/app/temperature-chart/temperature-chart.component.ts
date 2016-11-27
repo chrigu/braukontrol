@@ -9,7 +9,7 @@ declare let d3: any;
 })
 export class TemperatureChartComponent implements OnInit {
 
-  @Input() temperatureData: any;
+  @Input() bmData: any;
   @ViewChild('nvd3') nvD3: nvD3;
 
   private htmlElement: HTMLElement;
@@ -64,13 +64,26 @@ chart: {
 
   ngOnChanges(changes: any) {
     if (this.nvD3.chart) {
+      let dataArray = [];
       let tempData = {
-          values: changes['temperatureData']['currentValue'].toArray(),
+          values: changes['bmData']['currentValue'].get('temperature').toArray(),
           key: "Temperature",
           color: '#E53935',
           area: false
         };
-      this.data = [tempData];
+        dataArray.push(tempData);
+
+      if (changes['bmData']['currentValue'].has('targetTemperature')) {
+        let targetTempData = {
+            values: changes['bmData']['currentValue'].get('targetTemperature').toArray(),
+            key: "Target Temperature",
+            color: '#ae00ff',
+            area: false
+          };
+          dataArray.push(targetTempData);
+      };
+
+      this.data = dataArray;
       this.nvD3.chart.update()
       // this.cd.detectChanges();
 

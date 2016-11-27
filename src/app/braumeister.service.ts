@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestMethod, Request } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-const TIMEOUT = 60000;
+const TIMEOUT = 10*1000;
 
 @Injectable()
 export class BraumeisterService {
@@ -63,17 +63,32 @@ export class BraumeisterService {
     this.url$.next(url);
   }
 
+  private parseOpData(data:string):Object {
+    // p = pump off, q = pump inactive (temp)?, P = pump on
+    // h = heating off, H = heating on, q = heating on but inactive?
+
+    return {
+      pump: data.indexOf("P") > -1,
+      heating: data.indexOf("H") > -1
+    }
+  }
+
   private parseData(data: Response):Object {
     let regex = /(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X/;
     let results = regex.exec(data.text())
     console.log(results);
 
+    let opStatus = this.parseOpData(results[13]);
+
     return {
       time: moment(),
       bmTime: results[2],
       status: +results[3],
+      targetTemperature: (+results[4])/10,
       temperature: parseFloat(results[5].replace(" ", "")),
-      uptime: results[7]
+      uptime: results[7],
+      heating: opStatus['heating'],
+      pump: opStatus['pump']
     }
   }
 
