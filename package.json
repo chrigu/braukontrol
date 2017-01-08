@@ -1,6 +1,7 @@
 {
   "name": "braukontrol",
-  "version": "0.0.0",
+  "productName": "Braukontrol",
+  "version": "0.0.1",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
@@ -9,10 +10,15 @@
     "test": "ng test",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
-    "build": "ng build && cp -R src/public dist/public",
+    "build": "ng build",
+    "build_old": "ng build && cp -R src/public dist/public",
     "prepare": "cp -a electron/. dist",
     "electron": "npm run prepare && electron dist",
-    "package": "npm run build && npm run prepare && ./node_modules/electron-packager/cli.js dist App --platform=darwin --arch=all --out=dist-app --overwrite"
+    "package_old": "npm run build && npm run prepare && ./node_modules/electron-packager/cli.js dist Braukontrol --platform=darwin --arch=all --out=dist-app --overwrite",
+    "pack:osx": "electron-packager ./dist $npm_package_productName --out=dist/osx --platform=darwin --arch=x64 --icon=assets/build/osx/icon.icns",
+    "pack:win32": "electron-packager ./dist $npm_package_productName --out=dist/win --platform=win32 --arch=ia32",
+    "pack:win64": "electron-packager ./dist $npm_package_productName --out=dist/win --platform=win32 --arch=x64 app-version=1.0 --icon=assets/build/win/icon.ico",
+    "package": "ng build && npm run prepare && npm run pack:osx && npm run pack:win32 && npm run pack:win64"
   },
   "private": true,
   "dependencies": {

@@ -1,7 +1,7 @@
-import { Subscription } from 'rxjs/Subscription'
-import { List, Map } from 'immutable' 
-import { Observable } from 'rxjs/Observable'
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { List, Map } from 'immutable' ;
+import { Observable } from 'rxjs/Observable';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BraumeisterService } from '../braumeister.service';
 import { LocalstorageService } from '../localstorage.service';
 
@@ -10,7 +10,7 @@ import { LocalstorageService } from '../localstorage.service';
   templateUrl: './main-component.component.html',
   styleUrls: ['./main-component.component.css']
 })
-export class MainComponentComponent implements OnInit {
+export class MainComponentComponent implements OnInit, OnDestroy {
 
   private data = Map({
       temperature: List(),
@@ -18,22 +18,20 @@ export class MainComponentComponent implements OnInit {
   });
   // private tempData: List<any> = List();
   private recording: boolean = false;
-  private recordText = "Record";
+  private recordText = 'Record';
   private tempSubscription: Subscription;
   private temp$: Observable<any>;
   private displayData: Object;
   private showTargetTemp = false;
-  //private ip = "https://www.trivialview.ch/bm.txt";
-  private ip = "localhost:3000/bm.txt";
+  private ip = '192.168.1.32';
 
   constructor(
     private braumeisterService: BraumeisterService,
     private localStorageService: LocalstorageService
     ) { 
 
-    // const URL = "https://www.trivialview.ch/bm.txt";
       this.tempSubscription = this.braumeisterService.getStream()
-          .map((data:any) => { 
+          .map((data: any) => { 
             // get right data
 
             // save all data to localstorage

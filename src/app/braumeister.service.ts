@@ -1,10 +1,10 @@
-import * as moment from "moment";
+import * as moment from 'moment';
 import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestMethod, Request } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-const TIMEOUT = 10*1000;
+const TIMEOUT = 60 * 1000;
 
 @Injectable()
 export class BraumeisterService {
@@ -18,7 +18,7 @@ export class BraumeisterService {
     this.url$ = new Subject();
 
     this.data$ = Observable.combineLatest(
-      this.url$.startWith("").filter(url => url !== ""),
+      this.url$.startWith('').filter(url => url !== ''),
       Observable.timer(0, TIMEOUT)
       .timeInterval()
     )
@@ -29,7 +29,7 @@ export class BraumeisterService {
 
       let options = {
           method: RequestMethod.Get,
-          url: "http://" + values[0]
+          url: `http://${values[0]}/bm.txt`
       };
 
       return options;
@@ -38,7 +38,7 @@ export class BraumeisterService {
         .map((data: Response) => this.parseData(data))
         .catch(this.handleError));
 
-// "0X19:21X4006X1000X 44.0X0X34:02X2X5X3X0XAPHTXpHX000
+// '0X19:21X4006X1000X 44.0X0X34:02X2X5X3X0XAPHTXpHX000
   }
 
   private handleError (error: Response | any) {
@@ -68,8 +68,8 @@ export class BraumeisterService {
     // h = heating off, H = heating on, q = heating on but inactive?
 
     return {
-      pump: data.indexOf("P") > -1,
-      heating: data.indexOf("H") > -1
+      pump: data.indexOf('P') > -1,
+      heating: data.indexOf('H') > -1
     }
   }
 
@@ -85,7 +85,7 @@ export class BraumeisterService {
       bmTime: results[2],
       status: +results[3],
       targetTemperature: (+results[4])/10,
-      temperature: parseFloat(results[5].replace(" ", "")),
+      temperature: parseFloat(results[5].replace(' ', '')),
       uptime: results[7],
       heating: opStatus['heating'],
       pump: opStatus['pump']
