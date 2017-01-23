@@ -4,7 +4,7 @@ Currently it only logs the temperature of the Speidel's [Braumeister](https://ww
 
 ## Run Braukontrol
 
-1. Install the binary from xxxx and start it.
+1. Install the binary from Gitbug and start it.
 2. Enter the IP address of your Braumeister
 3. Click Record
 4. When you're done recording, click stop. You can export the data as CSV if required.

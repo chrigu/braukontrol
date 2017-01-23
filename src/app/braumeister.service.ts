@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestMethod, Request } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-const TIMEOUT = 60 * 1000;
+
+const TIMEOUT = 5 * 1000;
 
 @Injectable()
 export class BraumeisterService {
@@ -25,7 +26,7 @@ export class BraumeisterService {
     .map((values) => {
       let header = {'Content-Type': 'text/plain'};
 
-      let headers = new Headers(header)
+      let headers = new Headers(header);
 
       let options = {
           method: RequestMethod.Get,
@@ -39,6 +40,7 @@ export class BraumeisterService {
         .catch(this.handleError));
 
 // '0X19:21X4006X1000X 44.0X0X34:02X2X5X3X0XAPHTXpHX000
+
   }
 
   private handleError (error: Response | any) {
@@ -63,19 +65,28 @@ export class BraumeisterService {
     this.url$.next(url);
   }
 
-  private parseOpData(data:string):Object {
+  private parseOpData(data: string): Object {
     // p = pump off, q = pump inactive (temp)?, P = pump on
     // h = heating off, H = heating on, q = heating on but inactive?
-
+    /*
+    New Data: V1.1.24 Jan 12 2017;0004A30B003F4546;0X18:22XCX101X-10000X 17.5X4800X277X0X0X0X0XEMSRXphX000
+    */
     return {
       pump: data.indexOf('P') > -1,
       heating: data.indexOf('H') > -1
-    }
+    };
   }
 
-  private parseData(data: Response):Object {
+  private parseData(data: Response): Object {
+
+    let dataText = data.text();
+
+    if (dataText.startsWith('V')) {
+      dataText = dataText.split(';')[0];
+    }
+
     let regex = /(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X/;
-    let results = regex.exec(data.text())
+    let results = regex.exec(dataText);
     console.log(results);
 
     let opStatus = this.parseOpData(results[13]);
