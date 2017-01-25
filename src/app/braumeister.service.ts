@@ -5,7 +5,7 @@ import { Http, Response, Headers, RequestMethod, Request } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 
-const TIMEOUT = 5 * 1000;
+const TIMEOUT = 60 * 1000;
 
 @Injectable()
 export class BraumeisterService {
@@ -82,7 +82,7 @@ export class BraumeisterService {
     let dataText = data.text();
 
     if (dataText.startsWith('V')) {
-      dataText = dataText.split(';')[0];
+      dataText = dataText.split(';')[2];
     }
 
     let regex = /(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X(.*)X/;
