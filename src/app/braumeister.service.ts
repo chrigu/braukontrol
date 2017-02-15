@@ -7,7 +7,7 @@ import 'rxjs/add/operator/retry';
 import 'rxjs/add/observable/empty';
 
 
-const TIMEOUT = 10 * 1000;
+const TIMEOUT = 60 * 1000;
 
 @Injectable()
 export class BraumeisterService {
