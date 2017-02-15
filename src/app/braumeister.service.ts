@@ -3,9 +3,11 @@ import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestMethod, Request } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/retry';
+import 'rxjs/add/observable/empty';
 
 
-const TIMEOUT = 60 * 1000;
+const TIMEOUT = 10 * 1000;
 
 @Injectable()
 export class BraumeisterService {
@@ -37,6 +39,7 @@ export class BraumeisterService {
     })
     .switchMap(options => this.http.request(new Request(options))
         .map((data: Response) => this.parseData(data))
+        .retry(3)
         .catch(this.handleError));
 
 // '0X19:21X4006X1000X 44.0X0X34:02X2X5X3X0XAPHTXpHX000
@@ -54,7 +57,7 @@ export class BraumeisterService {
       errMsg = error.message ? error.message : error.toString();
     }
     console.error(errMsg);
-    return Observable.throw(errMsg);
+    return Observable.empty();
   }
 
   public getStream(): Observable<any> {
