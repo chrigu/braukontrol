@@ -29,3 +29,8 @@ npm run electron
 ## Deploying to Github Pages
 
 Run `ng github-pages:deploy` to deploy to Github Pages.
+
+## Todos
+
+* Add different environments (dev & prod)
+* Update ng2 (or use React 😱)
