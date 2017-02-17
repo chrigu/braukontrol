@@ -98,7 +98,7 @@ export class BraumeisterService {
       time: moment(),
       bmTime: results[2],
       status: +results[3],
-      targetTemperature: (+results[4])/10,
+      targetTemperature: (+results[4]) / 10,
       temperature: parseFloat(results[5].replace(' ', '')),
       uptime: results[7],
       heating: opStatus['heating'],

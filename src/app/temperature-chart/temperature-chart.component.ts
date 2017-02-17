@@ -55,7 +55,6 @@ chart: {
       },
       forceY: [30, 100],
       callback: function(chart){
-        console.log("!!! lineChart callback !!!");
       }
     }
     }

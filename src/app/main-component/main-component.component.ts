@@ -1,6 +1,7 @@
 import { Subscription } from 'rxjs/Subscription';
 import { List, Map } from 'immutable' ;
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BraumeisterService } from '../braumeister.service';
 import { LocalstorageService } from '../localstorage.service';
@@ -21,6 +22,7 @@ export class MainComponentComponent implements OnInit, OnDestroy {
   private recordText = 'Record';
   private tempSubscription: Subscription;
   private temp$: Observable<any>;
+  private targetTempUpdate$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   private displayData: Object;
   private showTargetTemp = false;
   private ip = '192.168.1.32';
@@ -28,11 +30,14 @@ export class MainComponentComponent implements OnInit, OnDestroy {
   constructor(
     private braumeisterService: BraumeisterService,
     private localStorageService: LocalstorageService
-    ) { 
+    ) {
 
-      this.tempSubscription = this.braumeisterService.getStream()
-          .map((data: any) => { 
+      this.tempSubscription = Observable.combineLatest(
+        this.braumeisterService.getStream(),
+        this.targetTempUpdate$)
+          .map((values: any) => {
             // get right data
+            let data = values[0];
 
             // save all data to localstorage
             // save all data in right format to local Object
@@ -56,11 +61,16 @@ export class MainComponentComponent implements OnInit, OnDestroy {
           })
           .subscribe((data) => {
             console.log(data);
+            // use async in template
             this.displayData = data;
           });
   }
 
   ngOnInit() {
+  }
+
+  onChange() {
+    this.targetTempUpdate$.next(this.showTargetTemp);
   }
 
   ngOnDestroy() {

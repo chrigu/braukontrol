@@ -4,8 +4,9 @@
       <button *ngIf="!recording" md-raised-button (click)="export()" color="primary">Export</button>
     </md-card>
     <md-card>
-      <label for="targetTemp">Target temperature</label>
-      <!--md-checkbox name="targetTemp" aria-label="Target Temperature" [(ngModel)]="showTargetTemp"></md-checkbox-->
+      <md-checkbox name="targetTemp" aria-label="Target Temperature" [(ngModel)]="showTargetTemp" (ngModelChange)="onChange($event)">
+        Show target Temperature
+      </md-checkbox>
       <app-temperature-chart [bmData]="displayData"></app-temperature-chart>
     </md-card>
 
