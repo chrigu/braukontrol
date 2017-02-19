@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { Chart } from './Chart';
 // import styles from './Home.css';
 
 
@@ -43,9 +44,10 @@ export default class Braumeister extends Component {
 
   render() {
 
-    const { startRecording, stopRecording, braumeister} = this.props;
+    const { startRecording, stopRecording, braumeister, tempData } = this.props;
     let recordButtonText = braumeister.record ? 'Stop' : 'Record';
     let ip;
+    console.log(tempData);
 
     return (
       <div className="container-fluid">
@@ -62,6 +64,7 @@ export default class Braumeister extends Component {
                   className="btn btn-default"
                   onClick={() => this.toggleRecord(ip.value)}>{recordButtonText}</button>
         </form>
+        <Chart data={tempData} />
       </div>
     );
   }

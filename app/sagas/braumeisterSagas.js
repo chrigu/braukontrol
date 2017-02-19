@@ -7,9 +7,9 @@ export function* getBraumeisterDataSaga({payload}) {
     try {
     const data = yield call(getBmData, payload);
     yield [
-        put({ type: braumeisterActionTypes.GET_BM_DATA_SUCCESS, data }),
+        put({ type: braumeisterActionTypes.GET_BM_DATA_SUCCESS, payload: data }),
     ];
     } catch (error) {
-    yield put({ type: braumeisterActionTypes.GET_BM_DATA_FAIL, error });
+    yield put({ type: braumeisterActionTypes.GET_BM_DATA_FAIL, payload: error });
     }
 }

@@ -43,3 +43,13 @@ export default function braumeister(state: braumeisterStateType = defaultState, 
       return state;
   }
 }
+
+// 
+
+export const getTemperatures = (state) => {
+  return state.data.map(dataItem => (
+    {
+      timestamp: dataItem.time,
+      data: dataItem.temperature
+    }));
+}

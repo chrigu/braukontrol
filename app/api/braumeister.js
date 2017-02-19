@@ -20,7 +20,7 @@ function parseData(data) {
     let opStatus = parseOpData(results[13]);
 
     return {
-      time: moment(),
+      time: moment().valueOf(),
       bmTime: results[2],
       status: +results[3],
       targetTemperature: (+results[4]) / 10,
