@@ -32,7 +32,6 @@ export class Chart extends Component {
       ]
     };
 
-    console.log(series);
     this.updateChart(series);
   }
 
@@ -43,7 +42,7 @@ export class Chart extends Component {
             type: Chartist.FixedScaleAxis,
             divisor: 5,
             labelInterpolationFnc: function(value) {
-            return moment(value).format('HH:MM');
+            return moment(value).format('HH:mm');
             }
         }
     });

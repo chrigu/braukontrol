@@ -6,6 +6,8 @@ export const STOP_RECORDING = 'STOP_RECORDING';
 export const GET_BM_DATA = 'GET_BM_DATA';
 export const GET_BM_DATA_SUCCESS = 'GET_BM_DATA_SUCCESS';
 export const GET_BM_DATA_FAIL = 'GET_BM_DATA_FAIL';
+export const EXPORT_BM_DATA = 'EXPORT_BM_DATA';
+
 
 export function startRecording(ipAddress) {
   return {
@@ -17,6 +19,12 @@ export function startRecording(ipAddress) {
 export function stopRecording() {
   return {
     type: STOP_RECORDING
+  };
+}
+
+export function exportBmData() {
+  return {
+    type: EXPORT_BM_DATA
   };
 }
 

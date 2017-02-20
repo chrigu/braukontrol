@@ -30,6 +30,7 @@ export default function braumeister(state: braumeisterStateType = defaultState, 
     case START_RECORDING:
       return {
         ...state,
+        data: [],
         record: true,
         ipAddress: action.payload
       };
@@ -52,4 +53,8 @@ export const getTemperatures = (state) => {
       timestamp: dataItem.time,
       data: dataItem.temperature
     }));
+}
+
+export const showExportButton = (state) => {
+  return state.data.length > 0 && !state.record;
 }

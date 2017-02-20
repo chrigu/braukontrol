@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Chart } from './Chart';
-// import styles from './Home.css';
+import styles from './Braumeister.css';
 
 
 export default class Braumeister extends Component {
@@ -44,16 +44,21 @@ export default class Braumeister extends Component {
 
   render() {
 
-    const { startRecording, stopRecording, braumeister, tempData } = this.props;
+    const { startRecording, stopRecording, braumeister, tempData, showExportButton, exportBmData } = this.props;
     let recordButtonText = braumeister.record ? 'Stop' : 'Record';
     let ip;
-    console.log(tempData);
+    let showExportButtonClass = showExportButton ? '' : ' is-hidden';
 
     return (
       <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-12">
+            <h1>Braukontrol</h1>
+          </div>
+        </div>
         <form className="form-inline">
           <div className="form-group">
-            <label className="sr-only" htmlFor="ip-address" >IP Address</label>
+            <label className="sr-only" htmlFor="ip-address">IP Address</label>
             <input type="text" 
                    className="form-control" 
                    id="ip-address" 
@@ -63,6 +68,11 @@ export default class Braumeister extends Component {
           <button type="button" 
                   className="btn btn-default"
                   onClick={() => this.toggleRecord(ip.value)}>{recordButtonText}</button>
+          <button type="button"
+                  className={`btn btn-default${showExportButtonClass}`}
+                  onClick={exportBmData}>
+                  Export
+          </button>
         </form>
         <Chart data={tempData} />
       </div>
