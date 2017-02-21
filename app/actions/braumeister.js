@@ -7,6 +7,8 @@ export const GET_BM_DATA = 'GET_BM_DATA';
 export const GET_BM_DATA_SUCCESS = 'GET_BM_DATA_SUCCESS';
 export const GET_BM_DATA_FAIL = 'GET_BM_DATA_FAIL';
 export const EXPORT_BM_DATA = 'EXPORT_BM_DATA';
+export const SHOW_TARGET_TEMP = 'SHOW_TARGET_TEMP';
+export const HIDE_TARGET_TEMP = 'HIDE_TARGET_TEMP';
 
 
 export function startRecording(ipAddress) {
@@ -39,5 +41,17 @@ export function getDataBmSuccess(data) {
   return {
     type: GET_BM_DATA_SUCCESS,
     payload: data
+  };
+}
+
+export function showTargetTemp() {
+  return {
+    type: SHOW_TARGET_TEMP
+  };
+}
+
+export function hideTargetTemp() {
+  return {
+    type: HIDE_TARGET_TEMP
   };
 }

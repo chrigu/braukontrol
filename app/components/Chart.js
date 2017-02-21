@@ -12,13 +12,14 @@ export class Chart extends Component {
   componentDidMount() {
 
     let {data} = this.props;
-    // this.updateChart(data);
-    console.log("initial", this.props.data)
+    console.log("initial", this.props.data);
   }
 
   componentWillReceiveProps({data}) {
 
-    let graphData = data.map(dataItem => ({
+    // todo: don't use position
+    // refactor....
+    let graphData = data[0].map(dataItem => ({
         x: new Date(dataItem.timestamp),
         y: dataItem.data
     }));
@@ -31,6 +32,15 @@ export class Chart extends Component {
       }
       ]
     };
+
+    if (data.length > 1) {
+      let targetTempData = data[1].map(dataItem => ({
+          x: new Date(dataItem.timestamp),
+          y: dataItem.data
+      }));
+
+      series.series.push(targetTempData);
+    }
 
     this.updateChart(series);
   }

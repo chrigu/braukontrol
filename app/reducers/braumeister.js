@@ -1,11 +1,15 @@
 // @flow
-import { GET_BM_DATA_SUCCESS, START_RECORDING, STOP_RECORDING } from '../actions/braumeister';
+import { GET_BM_DATA_SUCCESS, 
+         START_RECORDING,
+         STOP_RECORDING,
+         HIDE_TARGET_TEMP, 
+         SHOW_TARGET_TEMP } from '../actions/braumeister';
 
 export type braumeisterStateType = {
   record: boolean,
   ipAddress: string,
   data: Object[],
-  displayOptions: []
+  targetTempShown: boolean // todo: if more options move to own reducers
 };
 
 type actionType = {
@@ -17,7 +21,7 @@ const defaultState = {
   record: false,
   ipAddress: 'localhost:3000',
   data: [],
-  displayOptions: []
+  targetTempShown: false
 };
 
 export default function braumeister(state: braumeisterStateType = defaultState, action: actionType) {
@@ -40,6 +44,16 @@ export default function braumeister(state: braumeisterStateType = defaultState, 
         record: false,
         ipAddress: ''
       };
+    case SHOW_TARGET_TEMP:
+      return {
+        ...state,
+        targetTempShown: true
+      };
+    case HIDE_TARGET_TEMP:
+      return {
+        ...state,
+        targetTempShown: false
+      };
     default:
       return state;
   }
@@ -48,11 +62,24 @@ export default function braumeister(state: braumeisterStateType = defaultState, 
 // 
 
 export const getTemperatures = (state) => {
-  return state.data.map(dataItem => (
+
+  let data = [
+    state.data.map(dataItem => (
     {
       timestamp: dataItem.time,
       data: dataItem.temperature
-    }));
+    }))
+  ];
+
+  if (state.targetTempShown) {
+    data.push(state.data.map(dataItem => (
+    {
+      timestamp: dataItem.time,
+      data: dataItem.targetTemperature
+    })));
+  }
+
+  return data;
 }
 
 export const showExportButton = (state) => {
