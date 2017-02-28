@@ -163,6 +163,7 @@
   "dependencies": {
     "axios": "^0.15.3",
     "chartist": "^0.10.1",
+    "chartist-plugin-tooltip": "^0.0.11",
     "electron-debug": "^1.1.0",
     "font-awesome": "^4.7.0",
     "moment": "^2.17.1",

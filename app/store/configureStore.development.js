@@ -8,12 +8,14 @@ import rootReducer from '../reducers';
 import rootSaga from '../sagas';
 
 import * as braumeisterActions from '../actions/braumeister';
+import * as settingsActions from '../actions/settings';
 import type { braumeisterStateType } from '../reducers/braumeister';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const actionCreators = {
   ...braumeisterActions,
+  ...settingsActions,
   push,
 };
 
@@ -37,7 +39,7 @@ const enhancer = composeEnhancers(
   applyMiddleware(sagaMiddleware, thunk, router, logger)
 );
 
-export default function configureStore(initialState?: braumeisterStateType) {
+export default function configureStore(initialState?) {
   const store = createStore(rootReducer, initialState, enhancer);
 
   sagaMiddleware.run(rootSaga)
