@@ -1,5 +1,7 @@
 // @flow
-import { ADD_TEMPERATURE_ALERT, REMOVE_TEMPERATURE_ALERT } from '../actions/settings';
+import { ADD_TEMPERATURE_ALERT, 
+         REMOVE_TEMPERATURE_ALERT,
+         TRIGGER_ALERT } from '../actions/alerts';
 
 type TemperatureAlert = {treshold: number; triggered: boolean};
 
@@ -32,7 +34,14 @@ export default function alerts(state: settingsStateType = defaultState, action: 
           ...state.temperatureAlerts.slice(0, action.payload),
           ...state.temperatureAlerts.slice(action.payload + 1)
       ]};
-
+    case TRIGGER_ALERT:
+      return {
+        ...state,
+        temperatureAlerts: [
+          ...state.temperatureAlerts.slice(0, action.payload),
+          {...state.temperatureAlerts[action.payload], triggered: true},
+          ...state.temperatureAlerts.slice(action.payload + 1)
+      ]};
     default:
       return state;
   }

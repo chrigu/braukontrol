@@ -12,7 +12,6 @@ export default class Braumeister extends Component {
       super(props);
       this.toggleRecord = this.toggleRecord.bind(this);
       this.toggleTargetTemp = this.toggleTargetTemp.bind(this);
-      this.interval = null;
       this.ip = '';
     }
 
@@ -26,21 +25,19 @@ export default class Braumeister extends Component {
   //   this.ip = braumeister.ipAddress;
   // };
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
   toggleRecord(ip: string) {
     // use redux-thunk?
     if (this.props.braumeister.record) {
       this.props.stopRecording();
-      clearInterval(this.interval);
+      clearInterval(this.props.braumeister.intervalId);
     } else {
       this.props.startRecording(ip);
       this.props.getBmData(ip);
-      this.interval = setInterval(() => {
+      let interval = setInterval(() => {
         this.props.getBmData(ip);
       }, 5 * 1000);
+      this.props.setIntervalId(interval);
+      this.props.setBmIp(ip);
     }
   }
 
@@ -73,7 +70,11 @@ export default class Braumeister extends Component {
                       className="form-control" 
                       id="ip-address" 
                       placeholder="192.168.1.2"
-                      ref={node => { ip = node; }} />
+                      ref={(node) => { 
+                        ip = node; 
+                        if (ip) {
+                          ip.value = braumeister.ipAddress
+                        }}}/>
               </div>
               <button type="button" 
                       className="btn btn-default"

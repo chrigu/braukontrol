@@ -9,7 +9,8 @@ export const GET_BM_DATA_FAIL = 'GET_BM_DATA_FAIL';
 export const EXPORT_BM_DATA = 'EXPORT_BM_DATA';
 export const SHOW_TARGET_TEMP = 'SHOW_TARGET_TEMP';
 export const HIDE_TARGET_TEMP = 'HIDE_TARGET_TEMP';
-
+export const SET_INTERVAL_ID = 'SET_INTERVAL_ID';
+export const SET_BRAUMEISTER_IP = 'SET_BRAUMEISTER_IP';
 
 export function startRecording(ipAddress) {
   return {
@@ -55,3 +56,18 @@ export function hideTargetTemp() {
     type: HIDE_TARGET_TEMP
   };
 }
+
+export function setIntervalId(id: number) {
+  return {
+    type: SET_INTERVAL_ID,
+    payload: id
+  };
+}
+
+export function setBmIp(ip: string) {
+  return {
+    type: SET_BRAUMEISTER_IP,
+    payload: ip
+  };
+}
+

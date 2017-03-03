@@ -3,6 +3,7 @@ import { getBmData } from '../api/braumeister';
 import { generateCsv } from '../export/csv';
 import * as braumeisterActionTypes from '../actions/braumeister';
 import { getTemperatureAlerts } from '../reducers/alerts';
+import * as alertsActionTypes from '../actions/alerts';
 
 export const getAllData = (state) => state.braumeister.data;
 export const getTempAlerts = (state) => getTemperatureAlerts(state.alerts);
@@ -22,11 +23,16 @@ export function* exportCsvDataSaga(action) {
     let data = yield select(getAllData);
     yield call(generateCsv, data)
 }
-
+// todo: move to own saga
 export function* getBraumeisterDataSuccessSaga({payload}) {
     let data = yield select(getAllData);
     if (data.length > 1) {
         let alerts = yield select(getTempAlerts);
-        console.warn(alerts, data[data.length - 2]);
+        alerts.map((alert, index) => {
+            if (!alert.triggered && alert.treshold < payload.temperature) {
+                console.warn("boom", alert.treshold, payload.temperature);
+                alertsActionTypes.triggerAlert(index);
+            }
+        });
     }
 }

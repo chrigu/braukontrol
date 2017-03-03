@@ -3,12 +3,16 @@ import { GET_BM_DATA_SUCCESS,
          START_RECORDING,
          STOP_RECORDING,
          HIDE_TARGET_TEMP, 
-         SHOW_TARGET_TEMP } from '../actions/braumeister';
+         SHOW_TARGET_TEMP,
+         SET_INTERVAL_ID,
+         SET_BRAUMEISTER_IP } from '../actions/braumeister';
 
 export type braumeisterStateType = {
   record: boolean,
   ipAddress: string,
   data: Object[],
+  intervalId: number,
+  braumeisterIp: string,
   targetTempShown: boolean // todo: if more options move to own reducers
 };
 
@@ -21,6 +25,8 @@ const defaultState = {
   record: false,
   ipAddress: 'localhost:3000',
   data: [],
+  intervalId: 0,
+  braumeisterIp: '',
   targetTempShown: false
 };
 
@@ -54,6 +60,16 @@ export default function braumeister(state: braumeisterStateType = defaultState, 
         ...state,
         targetTempShown: false
       };
+    case SET_INTERVAL_ID:
+      return {
+        ...state,
+        intervalId: action.payload
+      }; 
+    case SET_BRAUMEISTER_IP:
+      return {
+        ...state,
+        braumeisterIp: action.payload
+      };  
     default:
       return state;
   }

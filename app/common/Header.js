@@ -6,7 +6,8 @@ import { Link, IndexLink } from 'react-router';
 const Header = () => (
   <Navbar inverse collapseOnSelect>
       <li><Link to="/" activeClassName="active">Index</Link></li>
-    <li><Link to="settings" activeClassName="active">Alerts</Link></li>
+    <li><Link to="alerts" activeClassName="active">Alerts</Link></li>
+    <li><Link to="settings" activeClassName="active">Settings</Link></li>
   </Navbar>
 );
 
