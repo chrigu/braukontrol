@@ -37,7 +37,7 @@ export function* getBraumeisterDataSuccessSaga({payload}) {
             const index = i;
             const alert = alerts[index];
 
-            if (!alert.triggered && alert.treshold < payload.temperature) {
+            if (!alert.triggered && alert.treshold <= payload.temperature) {
                 yield call(sendToPushover, `reached ${payload.temperature}°C`, notificationId);
                 yield put({type: alertsActionTypes.TRIGGER_ALERT, payload: index})
             }

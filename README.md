@@ -1,22 +1,38 @@
-# electron-react-boilerplate
+# Braukontrol
 
-[![Build Status][travis-image]][travis-url]
-[![Appveyor Build Status][appveyor-image]][appveyor-url]
-[![Dependency Status][david_img]][david_site]
-[![NPM version][npm-image]][npm-url]
-[![Join the chat at https://gitter.im/electron-react-boilerplate/Lobby](https://badges.gitter.im/electron-react-boilerplate/Lobby.svg)](https://gitter.im/electron-react-boilerplate/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Braukontrol logs your Braumeister's brewday. In addition you can add notifications so that you get notified when a certain temperture is reached (currently only rising tempertures)
 
-![](./erb-logo.png)
+## Using Braukontrol
 
-> Live editing development on desktop app
+### Basics
 
-[Electron](http://electron.atom.io/) application boilerplate based on [React](https://facebook.github.io/react/), [Redux](https://github.com/reactjs/redux), [React Router](https://github.com/reactjs/react-router), [Webpack](http://webpack.github.io/docs/), [React Transform HMR](https://github.com/gaearon/react-transform-hmr) for rapid application development
+1. Enter your Braumeister's IP address and click "Record"
+2. When you're done, click "Stop"
+3. If you want to export the data, hit "Export". Note: Make sure you export the data before you start another recording, otherwise your data will be lost.
+
+Note: It seems that the Braumeister does not handle multiple HTTP requests very well. Some data might get lost when using Speidels's web-app as the Braumeister will, as it seems, only handle one request at a time.
+
+### Notifications
+1. Download and install [Pushover](https://pushover.net/) (Free trial for 7 days). Oter services might be supported in the future.
+2. Enter your ID in the Settings section of the app.
+3. Add treshold temperatures in the Alerts section. When the temperature is reached (rising) the alert will be triggered and disabled.
+
+## Todos
+
+* Add tests
+* Support °F
+* Support other notification services
+* Show Braumeister status
+* Quick add for recipes
+* Native App for mobile
 
 ## Screenshot
 
 ![Electron Boilerplate Demo](https://cloud.githubusercontent.com/assets/3382565/10557547/b1f07a4e-74e3-11e5-8d27-79ab6947d429.gif)
 
-## Install
+## Development Installation
+
+This project is based on the [Electron React Boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
 
 * **Note: requires a node version >= 6 and an npm version >= 3.**
 * **If you have installation or compilation issues with this project, please see [our debugging guide](https://github.com/chentsulin/electron-react-boilerplate/issues/400)**
@@ -24,7 +40,7 @@
 First, clone the repo via git:
 
 ```bash
-git clone https://github.com/chentsulin/electron-react-boilerplate.git your-project-name
+git clone https://github.com/chrigu/braukontrol your-project-name
 ```
 
 And then install dependencies.
@@ -35,6 +51,8 @@ $ cd your-project-name && npm install
 ```
 
 :bulb: *In order to remove boilerplate sample code, simply run `npm run cleanup`. After this is run, the initial sample boilerplate code will be removed in order for a clean project for starting custom dev*
+
+Copy `app/constants.example.js` to `app/constants.js` and update it with your data.
 
 ## Run
 
@@ -196,19 +214,4 @@ git pull upstream master
 
 ## Maintainers
 
-- [C. T. Lin](https://github.com/chentsulin)
-- [Jhen-Jie Hong](https://github.com/jhen0409)
-- [Amila Welihinda](https://github.com/amilajack)
-
-
-## License
-MIT © [C. T. Lin](https://github.com/chentsulin)
-
-[npm-image]: https://img.shields.io/npm/v/electron-react-boilerplate.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/electron-react-boilerplate
-[travis-image]: https://travis-ci.org/chentsulin/electron-react-boilerplate.svg?branch=master
-[travis-url]: https://travis-ci.org/chentsulin/electron-react-boilerplate
-[appveyor-image]: https://ci.appveyor.com/api/projects/status/github/chentsulin/electron-react-boilerplate?svg=true
-[appveyor-url]: https://ci.appveyor.com/project/chentsulin/electron-react-boilerplate/branch/master
-[david_img]: https://img.shields.io/david/chentsulin/electron-react-boilerplate.svg
-[david_site]: https://david-dm.org/chentsulin/electron-react-boilerplate
+- [Chrigu Cueni](https://github.com/chriguc)
