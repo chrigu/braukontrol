@@ -13,7 +13,7 @@ Braukontrol logs your Braumeister's brewday. In addition you can add notificatio
 Note: It seems that the Braumeister does not handle multiple HTTP requests very well. Some data might get lost when using Speidels's web-app as the Braumeister will, as it seems, only handle one request at a time.
 
 ### Notifications
-1. Download and install [Pushover](https://pushover.net/) (Free trial for 7 days). Oter services might be supported in the future.
+1. Download and install [Pushover](https://pushover.net/) (Free trial for 7 days). Other services might be supported in the future.
 2. Enter your ID in the Settings section of the app.
 3. Add treshold temperatures in the Alerts section. When the temperature is reached (rising) the alert will be triggered and disabled.
 
@@ -27,10 +27,6 @@ Note: It seems that the Braumeister does not handle multiple HTTP requests very 
 * Show Braumeister status
 * Quick add for recipes
 * Native App for mobile
-
-## Screenshot
-
-![Electron Boilerplate Demo](https://cloud.githubusercontent.com/assets/3382565/10557547/b1f07a4e-74e3-11e5-8d27-79ab6947d429.gif)
 
 ## Development Installation
 
