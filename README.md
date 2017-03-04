@@ -21,6 +21,8 @@ Note: It seems that the Braumeister does not handle multiple HTTP requests very 
 
 * Add tests
 * Support °F
+* Remove example code from boilerplate
+* 🎨 things
 * Support other notification services
 * Show Braumeister status
 * Quick add for recipes
@@ -214,4 +216,4 @@ git pull upstream master
 
 ## Maintainers
 
-- [Chrigu Cueni](https://github.com/chriguc)
+- [Chrigu Cueni](https://github.com/chrigu)

@@ -1,7 +1,7 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "ElectronReact",
-  "version": "0.10.0",
+  "name": "braukontrol",
+  "productName": "Braukontrol",
+  "version": "0.3.0",
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "main": "main.js",
   "scripts": {
@@ -29,8 +29,8 @@
   },
   "browserslist": "electron 1.4",
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.develar.ElectronReact",
+    "productName": "Braukontrol",
+    "appId": "ch.brewday.Braukontrol",
     "category": "public.app-category.tools",
     "dmg": {
       "contents": [
@@ -46,6 +46,10 @@
           "type": "file"
         }
       ]
+    },
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
     },
     "files": [
       "dist/",
@@ -65,29 +69,25 @@
       ]
     }
   },
-  "directories": {
-    "buildResources": "resources",
-    "output": "release"
-  },
   "bin": {
     "electron": "./node_modules/.bin/electron"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chentsulin/electron-react-boilerplate.git"
+    "url": "git+https://github.com/chrigu/braukontrol.git"
   },
   "author": {
     "name": "C. T. Lin",
-    "email": "chentsulin@gmail.com",
-    "url": "https://github.com/chentsulin"
+    "email": "christian.cueni@gmail.com",
+    "url": "https://github.com/chrigu"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chentsulin/electron-react-boilerplate/issues"
+    "url": "https://github.com/chrigu/braukontrol/issues"
   },
   "keywords": [
-    "electron",
-    "boilerplate",
+    "braumeister",
+    "brewing",
     "react",
     "react-router",
     "flux",
