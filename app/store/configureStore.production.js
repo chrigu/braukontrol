@@ -16,8 +16,7 @@ const sagaMiddleware = createSagaMiddleware();
 const enhancer = applyMiddleware(sagaMiddleware, thunk, router);
 
 export default function configureStore(initialState?: counterStateType) {
-
-  sagaMiddleware.run(rootSaga)
-
-  return createStore(rootReducer, initialState, enhancer); // eslint-disable-line
+  const store = createStore(rootReducer, initialState, enhancer); // eslint-disable-line;
+  sagaMiddleware.run(rootSaga);
+  return store;
 }

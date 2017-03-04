@@ -30,6 +30,7 @@ export default class Settings extends Component {
         <div className="row">
           <div className="col-md-4">
             <form onSubmit={e => {
+                e.preventDefault();
                 setNotificationId(idField.value);
               }}>
               <div className="form-group">

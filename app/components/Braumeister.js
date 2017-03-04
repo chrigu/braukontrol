@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Chart } from './Chart';
 import styles from './Braumeister.css';
+import { UPDATE_INTERVAL } from '../constants';
 
 
 export default class Braumeister extends Component {
@@ -34,7 +35,7 @@ export default class Braumeister extends Component {
       this.props.getBmData(ip);
       let interval = setInterval(() => {
         this.props.getBmData(ip);
-      }, 5 * 1000);
+      }, UPDATE_INTERVAL);
       this.props.setIntervalId(interval);
       this.props.setBmIp(ip);
     }

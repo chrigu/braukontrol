@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
   sourceMapSupport.install();
 }
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'production') {
   require('electron-debug')(); // eslint-disable-line global-require
   const path = require('path'); // eslint-disable-line
   const p = path.join(__dirname, '..', 'app', 'node_modules'); // eslint-disable-line
@@ -139,7 +139,7 @@ app.on('ready', async () => {
       }]
     }, {
       label: 'View',
-      submenu: (process.env.NODE_ENV === 'development') ? [{
+      submenu: (process.env.NODE_ENV === 'production') ? [{
         label: 'Reload',
         accelerator: 'Command+R',
         click() {

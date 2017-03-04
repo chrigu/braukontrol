@@ -34,7 +34,7 @@ export default class Alerts extends Component {
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-12">
-            <h1>Settings</h1>
+            <h1>Alerts</h1>
           </div>
         </div>
         <div className="row">

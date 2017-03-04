@@ -6,7 +6,7 @@ const Alert = ({alert, remove, index}) => {
   return (
     <div className="alert row">
         <div className="col-xs-2">
-            <span>{alert.treshold}°C</span>
+            <span>{alert.treshold}°C/°F</span>
         </div>
         <div className="col-xs-3">
             <span>Triggered:
