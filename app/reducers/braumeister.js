@@ -23,7 +23,7 @@ type actionType = {
 
 const defaultState = {
   record: false,
-  ipAddress: 'localhost:3000',
+  ipAddress: 'localhost:4200',
   data: [],
   intervalId: 0,
   braumeisterIp: '',

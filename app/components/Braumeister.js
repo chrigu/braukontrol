@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Chart } from './Chart';
 import styles from './Braumeister.css';
-import Header from '../common/Header';
 
 
 export default class Braumeister extends Component {
@@ -55,7 +54,6 @@ export default class Braumeister extends Component {
 
     return (
       <div className="container-fluid">
-        <Header />
         <div className="row">
           <div className="col-md-12">
             <h1>Braukontrol</h1>

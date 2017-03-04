@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 import { Chart } from './Chart';
 import styles from './Braumeister.css';
 import Alert from './Alert';
-import Header from '../common/Header';
 
 export default class Settings extends Component {
 
@@ -12,16 +11,6 @@ export default class Settings extends Component {
       super(props);
 
     }
-
-  // componentDidMount() {
-  //   let {braumeister} = this.props;
-  //   this.ip = braumeister.ipAddress;
-  // }
-
-  // componentWillReceiveProps({data}) {
-  //   let {braumeister} = this.props;
-  //   this.ip = braumeister.ipAddress;
-  // };
 
   componentWillUnmount() {
   }
@@ -33,20 +22,18 @@ export default class Settings extends Component {
 
     return (
       <div className="container-fluid">
-        <Header />
         <div className="row">
           <div className="col-md-12">
             <h1>Settings</h1>
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-4">
             <form onSubmit={e => {
                 setNotificationId(idField.value);
-              }}
-              className="form-inline">
+              }}>
               <div className="form-group">
-                <label htmlFor="notification-id">Pushbox ID</label>
+                <label htmlFor="notification-id">Pushover ID</label>
                 <input type="text" 
                        className="form-control" id="notification-id" placeholder="Your ID" 
                        ref={(node) => { 

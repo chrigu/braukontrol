@@ -3,6 +3,7 @@ import moment from 'moment';
 export const generateCsv = function(data) {
 
     let csvData = data.reduce((csvContent, dataItem) => {
+        console.log(csvContent);
         let valuesArray = [];
         for(let key in dataItem) {
             let value = dataItem[key];
@@ -12,7 +13,7 @@ export const generateCsv = function(data) {
             }
             valuesArray.push(value);
         }
-        return csvContent + valuesArray.join(",");
+        return csvContent + valuesArray.join(",") + String.fromCharCode(13);
     }, 'data:text/csv;charset=utf-8,');
 
     let encodedUri = encodeURI(csvData + '\n');

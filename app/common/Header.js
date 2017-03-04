@@ -1,13 +1,29 @@
 import React from 'react';
 import { Navbar, Nav, NavItem, MenuItem } from 'react-bootstrap';
-// import { LinkContainer } from 'react-router-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { Link, IndexLink } from 'react-router';
 
 const Header = () => (
   <Navbar inverse collapseOnSelect>
-      <li><Link to="/" activeClassName="active">Index</Link></li>
-    <li><Link to="alerts" activeClassName="active">Alerts</Link></li>
-    <li><Link to="settings" activeClassName="active">Settings</Link></li>
+    <Navbar.Header>
+      <Navbar.Brand>
+        <a href="#">Braukontrol</a>
+      </Navbar.Brand>
+      <Navbar.Toggle />
+    </Navbar.Header>
+    <Navbar.Collapse>
+      <Nav>
+        <LinkContainer to="/">
+          <NavItem>Home</NavItem>
+        </LinkContainer>
+        <LinkContainer to="alerts">
+          <NavItem>Alerts</NavItem>
+        </LinkContainer>
+        <LinkContainer to="settings">
+          <NavItem>Settings</NavItem>
+        </LinkContainer>
+      </Nav>
+    </Navbar.Collapse>
   </Navbar>
 );
 

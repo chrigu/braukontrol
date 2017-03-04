@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 import { Chart } from './Chart';
 import styles from './Braumeister.css';
 import Alert from './Alert';
-import Header from '../common/Header';
 
 export default class Alerts extends Component {
 
@@ -33,7 +32,6 @@ export default class Alerts extends Component {
 
     return (
       <div className="container-fluid">
-          <Header />
         <div className="row">
           <div className="col-md-12">
             <h1>Settings</h1>
