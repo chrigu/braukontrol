@@ -8,7 +8,10 @@ import { setNotificationId } from '../reducers/settings';
 
 function mapStateToProps(state) {
   return {
-    notificationId: state.settings.notificationId // only use required data...
+    notificationId: state.settings.notificationId,
+    userMessageShown: state.settings.userMessageShown,
+    showUserMessage: state.settings.showUserMessage,
+    hideUserMessage: state.settings.hideUserMessage
   };
 }
 

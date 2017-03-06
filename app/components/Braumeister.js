@@ -93,7 +93,7 @@ export default class Braumeister extends Component {
                 <div className="checkbox">
                   <label>
                     <input type="checkbox" 
-                           value={braumeister.targetTempShown}
+                           checked={braumeister.targetTempShown}
                            onClick={() => this.toggleTargetTemp(braumeister.targetTempShown)}/> Show target temperature
                   </label>
                 </div>

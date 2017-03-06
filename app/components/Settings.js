@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
+import { Alert } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { Chart } from './Chart';
 import styles from './Braumeister.css';
-import Alert from './Alert';
 
 export default class Settings extends Component {
 
@@ -18,10 +18,24 @@ export default class Settings extends Component {
   render() {
 
     let idField;
-    let { setNotificationId, notificationId } = this.props;
+    let { setNotificationId, 
+          notificationId, 
+          userMessageShown, 
+          showUserMessage,
+          hideUserMessage } = this.props;
 
     return (
       <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-12">
+            {
+              userMessageShown &&
+                <Alert bsStyle="success">
+                  <strong>All saved!</strong>
+                </Alert>
+            }
+          </div>
+        </div>
         <div className="row">
           <div className="col-md-12">
             <h1>Settings</h1>
@@ -32,6 +46,8 @@ export default class Settings extends Component {
             <form onSubmit={e => {
                 e.preventDefault();
                 setNotificationId(idField.value);
+                showUserMessage();
+                setTimeout(() => hideUserMessage(), 1500);
               }}>
               <div className="form-group">
                 <label htmlFor="notification-id">Pushover ID</label>
