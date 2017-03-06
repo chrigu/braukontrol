@@ -1,44 +1,45 @@
-// /* eslint-disable no-unused-expressions */
-// import { expect } from 'chai';
-// import { spy } from 'sinon';
-// import React from 'react';
-// import { shallow } from 'enzyme';
-// import Counter from '../../app/components/Counter';
+/* eslint-disable no-unused-expressions */
+import { expect } from 'chai';
+import { spy } from 'sinon';
+import React from 'react';
+import { shallow } from 'enzyme';
+import Settings from '../../app/components/Settings';
 
 
-// function setup() {
-//   const actions = {
-//     increment: spy(),
-//     incrementIfOdd: spy(),
-//     incrementAsync: spy(),
-//     decrement: spy()
-//   };
-//   const component = shallow(<Counter counter={1} {...actions} />);
-//   return {
-//     component,
-//     actions,
-//     buttons: component.find('button'),
-//     p: component.find('.counter')
-//   };
-// }
+function setup() {
+  const actions = {
+    setNotificationId: spy(),
+    showUserMessage: spy(),
+    hideUserMessage: spy()
+  };
+  const component = shallow(<Settings {...actions} />);
+  return {
+    component,
+    actions,
+    buttons: component.find('button'),
+    input: component.find('.notification-id'),
+    h1: component.find('.settings-title')
+  };
+}
 
 
-// describe('Counter component', () => {
-//   it('should should display count', () => {
-//     const { p } = setup();
-//     expect(p.text()).to.match(/^1$/);
-//   });
+describe('Settings component', () => {
+  it('should should display count', () => {
+    const { h1 } = setup();
+    expect(h1.text()).to.equal('Settings');
+  });
 
-//   it('should first button should call increment', () => {
+//   it('should save button should call set id', () => {
 //     const { buttons, actions } = setup();
 //     buttons.at(0).simulate('click');
-//     expect(actions.increment.called).to.be.true;
+//     expect(actions.setNotificationId.called).to.be.true;
 //   });
 
-//   it('should second button should call decrement', () => {
+//   it('should save button should show user msg', () => {
 //     const { buttons, actions } = setup();
 //     buttons.at(1).simulate('click');
-//     expect(actions.decrement.called).to.be.true;
+//     // console.log(buttons)
+//     expect(actions.showUserMessage.called).to.be.true;
 //   });
 
 //   it('should third button should call incrementIfOdd', () => {
@@ -52,4 +53,4 @@
 //     buttons.at(3).simulate('click');
 //     expect(actions.incrementAsync.called).to.be.true;
 //   });
-// });
+});

@@ -38,7 +38,7 @@ export default class Settings extends Component {
         </div>
         <div className="row">
           <div className="col-md-12">
-            <h1>Settings</h1>
+            <h1 className="settings-title">Settings</h1>
           </div>
         </div>
         <div className="row">
@@ -52,7 +52,7 @@ export default class Settings extends Component {
               <div className="form-group">
                 <label htmlFor="notification-id">Pushover ID</label>
                 <input type="text" 
-                       className="form-control" id="notification-id" placeholder="Your ID" 
+                       className="form-control notification-id" id="notification-id" placeholder="Your ID" 
                        ref={(node) => { 
                          idField = node; 
                          if (idField) {
