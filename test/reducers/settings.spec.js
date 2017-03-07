@@ -1,24 +1,51 @@
-// import { expect } from 'chai';
-// import counter from '../../app/reducers/counter';
-// import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../../app/actions/counter';
+import { expect } from 'chai';
+import settings from '../../app/reducers/settings';
+import { SET_NOTIFICATION_ID, SHOW_USER_MESSAGE, HIDE_USER_MESSAGE } from '../../app/actions/settings';
 
+let initialState = {
+    notificationId: '',
+    userMessageShown: false
+}
 
-// describe('reducers', () => {
-//   describe('counter', () => {
-//     it('should handle initial state', () => {
-//       expect(counter(undefined, {})).to.equal(0);
-//     });
+describe('reducers', () => {
+  describe('settings', () => {
+    it('should handle initial state', () => {
+      expect(settings(undefined, {})).to.deep.equal(initialState);
+    });
 
-//     it('should handle INCREMENT_COUNTER', () => {
-//       expect(counter(1, { type: INCREMENT_COUNTER })).to.equal(2);
-//     });
+    it('should handle SET_NOTIFICATION_ID', () => {
+      
+      let id = 'somsomsmsmsmsmms';
+      expect(settings(initialState, 
+      { 
+          type: SET_NOTIFICATION_ID,
+          payload: id
+       })).to.deep.equal({
+          notificationId: id,
+          userMessageShown: initialState['userMessageShown']
+      });
+    });
 
-//     it('should handle DECREMENT_COUNTER', () => {
-//       expect(counter(1, { type: DECREMENT_COUNTER })).to.equal(0);
-//     });
+    it('should handle SHOW_USER_MESSAGE', () => {
+      
+      expect(settings(initialState, 
+      { 
+          type: SHOW_USER_MESSAGE
+       })).to.deep.equal({
+          notificationId: initialState['notificationId'],
+          userMessageShown: true
+      });
+    });
 
-//     it('should handle unknown action type', () => {
-//       expect(counter(1, { type: 'unknown' })).to.equal(1);
-//     });
-//   });
-// });
+    it('should handle HIDE_USER_MESSAGE', () => {
+      
+      expect(settings(initialState, 
+      { 
+          type: HIDE_USER_MESSAGE
+       })).to.deep.equal({
+          notificationId: initialState['notificationId'],
+          userMessageShown: false
+      });
+    });
+  });
+});
