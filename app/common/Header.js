@@ -19,6 +19,9 @@ const Header = () => (
         <LinkContainer to="alerts">
           <NavItem>Alerts</NavItem>
         </LinkContainer>
+        <LinkContainer to="recipes">
+          <NavItem>Recipes</NavItem>
+        </LinkContainer>
         <LinkContainer to="settings">
           <NavItem>Settings</NavItem>
         </LinkContainer>
