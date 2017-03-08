@@ -3,7 +3,10 @@ import { ADD_TEMPERATURE_ALERT,
          REMOVE_TEMPERATURE_ALERT,
          TRIGGER_ALERT } from '../actions/alerts';
 
-type TemperatureAlert = {treshold: number; triggered: boolean};
+type TemperatureAlert = {
+  treshold: number; 
+  triggered: boolean
+};
 
 export type settingsStateType = {
   notificationId: string,
