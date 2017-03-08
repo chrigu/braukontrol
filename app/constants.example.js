@@ -3,7 +3,7 @@ let updateInterval = 60 * 1000;     // Interval for Braumeister
 
 if (process.env.NODE_ENV === 'development') {
     pushoverApiToken = 'app token';
-    updateInterval = 5 * 1000;
+    updateInterval = 30 * 1000;
 } else if (process.env.NODE_ENV === 'production') {
     pushoverApiToken = 'app token';
 }
