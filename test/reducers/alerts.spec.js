@@ -2,10 +2,10 @@ import { expect } from 'chai';
 import alerts from '../../app/reducers/alerts';
 import { ADD_TEMPERATURE_ALERT, REMOVE_TEMPERATURE_ALERT, TRIGGER_ALERT } from '../../app/actions/alerts';
 
-const initialState = {
-  notificationId: '',
-  temperatureAlerts: []
-};
+const initialState = { 
+    byId: {},
+    allIds: [] 
+}
 
 describe('reducers', () => {
   describe('alerts', () => {
@@ -17,7 +17,8 @@ describe('reducers', () => {
       
       let alert = {
         treshold: 34,
-        triggered: false
+        triggered: false,
+        id: '234234-ssersdf-232332-sdfsdf'
       };
 
       expect(alerts(initialState, 
@@ -32,23 +33,25 @@ describe('reducers', () => {
 
     it('should handle REMOVE_TEMPERATURE_ALERT', () => {
 
-        let index = 1;
+        let id = '234234-ssersdf-232332-dfsdf';
       
         let alertList = [
             {
                 treshold: 34,
-                triggered: false
+                triggered: false,
+                id: id
             },
             {
                 treshold: 67,
-                triggered: false
+                triggered: false,
+                id: '234234-ssersdf-232332-32234'
             }
         ];
 
       expect(alerts({...initialState, temperatureAlerts: alertList}, 
       { 
           type: REMOVE_TEMPERATURE_ALERT,
-          payload: index
+          payload: id
        })).to.deep.equal({
            notificationId: initialState.notificationId,
            temperatureAlerts: [alertList[0]]
@@ -57,42 +60,48 @@ describe('reducers', () => {
 
     it('should handle TRIGGER_ALERT', () => {
 
-        let index = 1;
+        let id = '234234-sse32332df-232332-32234';
       
         let initialAlertList = [
             {
                 treshold: 34,
-                triggered: false
+                triggered: false,
+                id: '234234-ssersdf-232332-32234'
             },
             {
                 treshold: 67,
-                triggered: false
+                triggered: false,
+                id: id
             },
             {
                 treshold: 100,
-                triggered: false
+                triggered: false,
+                id: '234234-ssersdf-232332-2323231134'
             }
         ];
 
         let expectedAlertList = [
             {
                 treshold: 34,
-                triggered: false
+                triggered: false,
+                id: '234234-ssersdf-232332-32234'
             },
             {
                 treshold: 67,
-                triggered: true
+                triggered: true,
+                id: id
             },
             {
                 treshold: 100,
-                triggered: false
+                triggered: false,
+                id: '234234-ssersdf-232332-2323231134'
             }
         ];
 
       expect(alerts({...initialState, temperatureAlerts: initialAlertList }, 
       { 
           type: TRIGGER_ALERT,
-          payload: index
+          payload: id
        })).to.deep.equal({
            notificationId: initialState.notificationId,
            temperatureAlerts: expectedAlertList

@@ -1,28 +1,30 @@
 // @flow
+import { v4 } from 'node-uuid';
+
 import type { alertsStateType, TemperatureAlert } from '../reducers/alerts';
 
 export const ADD_TEMPERATURE_ALERT = 'ADD_TEMPERATURE_ALERT';
 export const REMOVE_TEMPERATURE_ALERT = 'REMOVE_TEMPERATURE_ALERT';
 export const TRIGGER_ALERT = 'TRIGGER_ALERT';
 
-export function addTemperatureAlert(alert) {
-  return {
+export const addTemperatureAlert = (alert) => (
+  {
     type: ADD_TEMPERATURE_ALERT,
-    payload: alert
-  };
-}
+    payload: { ...alert, id: v4() }
+  }
+)
 
-export function removeTemperatureAlert(index: number) {
-  return {
+export const removeTemperatureAlert = (id: string) => (
+  {
     type: REMOVE_TEMPERATURE_ALERT,
-    payload: index
-  };
-}
+    payload: id
+  }
+)
 
-export function triggerAlert(index: number) {
-  return {
+export const triggerAlert = (id: string) => (
+  {
     type: TRIGGER_ALERT,
-    payload: index
-  };
-}
+    payload: id
+  }
+);
 
