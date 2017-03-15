@@ -31,7 +31,7 @@ const alert = (state, action: actionType) => {
     case ADD_TEMPERATURE_ALERT:
       return action.payload;
     case TRIGGER_ALERT:
-      return { ...action.payload, triggered: true }
+      return { ...state, triggered: true }
     default:
       return state;
   }
@@ -45,7 +45,7 @@ const allIds = (state = [], action) => {
         action.payload.id,
         ];
     case REMOVE_TEMPERATURE_ALERT:
-      return state.filter(item => item.id !== action.payload.id)
+      return state.filter(id => id !== action.payload)
     default:
       return state;
   }
@@ -54,11 +54,23 @@ const allIds = (state = [], action) => {
 const byId = (state = {}, action) => {
   switch (action.type) {
     case ADD_TEMPERATURE_ALERT:
-    case TRIGGER_ALERT:
       return {
         ...state,
         [action.payload.id]: alert(state[action.payload.id], action),
       };
+    case TRIGGER_ALERT:
+      return {
+        ...state,
+        [action.payload]: alert(state[action.payload], action),
+      };
+    case REMOVE_TEMPERATURE_ALERT:
+      let newState = {};
+      Object.keys( state ).forEach(( (key) => {
+        if (key !== action.payload) {
+          newState[key] = {...state[key]}
+        }
+      }));
+      return newState;
     default:
       return state;
   }
