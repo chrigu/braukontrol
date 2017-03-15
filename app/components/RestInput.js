@@ -4,7 +4,7 @@ import { Alert } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { Chart } from './Chart';
 
-export default class Recipes extends Component {
+export default class RestInput extends Component {
 
   constructor(props) {
       super(props);

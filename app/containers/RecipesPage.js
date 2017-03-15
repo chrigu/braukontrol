@@ -8,7 +8,7 @@ import { userMessageShown } from '../reducers/recipes';
 
 function mapStateToProps(state) {
   return {
-    // notificationId: state.settings.notificationId,
+    recipe: state.recipes.recipe,
     // userMessageShown: state.settings.userMessageShown,
     // showUserMessage: state.settings.showUserMessage,
     // hideUserMessage: state.settings.hideUserMessage
