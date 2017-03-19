@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   settings,
   recipes,
   routing,
-  formReducer
+  form: formReducer
 });
 
 export default rootReducer;
