@@ -39,7 +39,7 @@ export function* getBraumeisterDataSuccessSaga({payload}) {
 
             if (!alert.triggered && alert.treshold <= payload.temperature) {
                 yield call(sendToPushover, `reached ${payload.temperature}°C`, notificationId);
-                yield put({type: alertsActionTypes.TRIGGER_ALERT, payload: index})
+                yield put({type: alertsActionTypes.TRIGGER_ALERT, payload: alert.id})
             }
         }
         // why not map? context?

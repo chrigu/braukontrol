@@ -62,7 +62,7 @@ export default class Alerts extends Component {
             <div className="alerts">
               {temperatureAlerts.map((alert, index) => (
                 <div key={index} className="alert-wrappper">
-                  <Alert alert={alert} remove={removeTemperatureAlert} index={index}/>
+                  <Alert alert={alert} remove={removeTemperatureAlert} />
                 </div>
               ))}
             </div>

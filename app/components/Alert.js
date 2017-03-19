@@ -1,7 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 
-const Alert = ({alert, remove, index}) => {
+const Alert = ({alert, remove}) => {
 
   return (
     <div className="alert row">
@@ -14,7 +14,7 @@ const Alert = ({alert, remove, index}) => {
             </span>
         </div>
         <div className="col-xs-1 pull-right">
-            <span className="glyphicon glyphicon-trash" aria-hidden="true" onClick={() => remove(index)}></span>
+            <span className="glyphicon glyphicon-trash" aria-hidden="true" onClick={() => remove(alert.id)}></span>
         </div>
     </div>
   );
@@ -22,7 +22,6 @@ const Alert = ({alert, remove, index}) => {
 
 Alert.propTypes = {
   alert: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired,
   remove: PropTypes.func.isRequired
 };
 

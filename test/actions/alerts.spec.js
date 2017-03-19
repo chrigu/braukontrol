@@ -7,20 +7,22 @@ import * as actions from '../../app/actions/alerts';
 describe('alerts actions', () => {
   it('should add temp alert should create add temp alert action', () => {
     let alert = {treshold: 34, triggered: false};
-    expect(actions.addTemperatureAlert(alert))
-        .to.deep.equal({ type: actions.ADD_TEMPERATURE_ALERT, payload: alert });
+    let action = actions.addTemperatureAlert(alert)
+    expect(action.type).to.equal( actions.ADD_TEMPERATURE_ALERT);
+    expect(action.payload.treshold).to.equal( alert.treshold );
+    expect(action.payload.triggered).to.equal( alert.triggered );
   });
 
   it('should remove temp alert should create add temp alert action', () => {
-    let index = 2;
-    expect(actions.removeTemperatureAlert(index))
-        .to.deep.equal({ type: actions.REMOVE_TEMPERATURE_ALERT, payload: index });
+    let id = 'asdsdaf-asdfsa23322424';
+    expect(actions.removeTemperatureAlert(id))
+        .to.deep.equal({ type: actions.REMOVE_TEMPERATURE_ALERT, payload: id });
   });
 
   it('should trigger temp alert should create add trigger alert action', () => {
-    let index = 2;
-    expect(actions.triggerAlert(index))
-        .to.deep.equal({ type: actions.TRIGGER_ALERT, payload: index });
+    let id = 'asdsdaf-asdfsa23322424';
+    expect(actions.triggerAlert(id))
+        .to.deep.equal({ type: actions.TRIGGER_ALERT, payload: id });
   });
 
 //   it('should incrementIfOdd should create increment action', () => {
