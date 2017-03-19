@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Link } from 'react-router';
-import { Chart } from './Chart';
+import { RecipeForm } from './RecipeForm';
 
 export default class Recipes extends Component {
 
