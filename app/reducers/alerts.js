@@ -83,36 +83,6 @@ const alerts = combineReducers({
 
 export default alerts;
 
-// export default function alerts(state: settingsStateType = defaultState, action: actionType) {
-//   switch (action.type) {
-//     case ADD_TEMPERATURE_ALERT:
-//       return {
-//         ...state,
-//         temperatureAlerts: [...state.temperatureAlerts, action.payload]
-//       };
-//     case REMOVE_TEMPERATURE_ALERT:
-//       return {
-//         ...state,
-//         temperatureAlerts: [
-//           ...state.temperatureAlerts.slice(0, action.payload),
-//           ...state.temperatureAlerts.slice(action.payload + 1)
-//       ]};
-//     case TRIGGER_ALERT:
-//       return {
-//         ...state,
-//         temperatureAlerts: [
-//           ...state.temperatureAlerts.slice(0, action.payload),
-//           {...state.temperatureAlerts[action.payload], triggered: true},
-//           ...state.temperatureAlerts.slice(action.payload + 1)
-//       ]};
-//     default:
-//       return state;
-//   }
-// }
-
 export const getAllAlerts = (state) =>
   state.allIds.map(id => state.byId[id]);
 
-export const getTemperatureAlerts = (state) => {
-  return state.temperatureAlerts;
-}
